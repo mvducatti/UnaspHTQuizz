@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textViewNome"
+        android:id="@+id/textViewPergunta"
         android:layout_width="101dp"
         android:layout_height="26dp"
         android:text="TextView"
@@ -20,7 +20,7 @@
         app:layout_constraintHorizontal_bias="0.029" />
 
     <TextView
-        android:id="@+id/textViewTelefone"
+        android:id="@+id/textViewOptCerta"
         android:layout_width="99dp"
         android:layout_height="28dp"
         android:layout_marginBottom="8dp"
@@ -32,11 +32,27 @@
         app:layout_constraintHorizontal_bias="0.029"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewEmail"
+        app:layout_constraintTop_toBottomOf="@+id/textViewOpt2"
+        app:layout_constraintVertical_bias="0.003" />
+
+    <TextView
+        android:id="@+id/textViewOpt2"
+        android:layout_width="99dp"
+        android:layout_height="28dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.029"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewOpt1"
         app:layout_constraintVertical_bias="0.016" />
 
     <TextView
-        android:id="@+id/textViewEmail"
+        android:id="@+id/textViewOpt1"
         android:layout_width="99dp"
         android:layout_height="28dp"
         android:layout_marginBottom="8dp"
@@ -48,7 +64,7 @@
         app:layout_constraintHorizontal_bias="0.029"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNome"
+        app:layout_constraintTop_toBottomOf="@+id/textViewPergunta"
         app:layout_constraintVertical_bias="0.014" />
 
     <Button
@@ -71,12 +87,13 @@
         android:id="@+id/buttonApagar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="364dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:text="APAGAR"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.767"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="81dp" />
+        app:layout_constraintRight_toRightOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

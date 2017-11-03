@@ -11,12 +11,12 @@ import java.sql.ResultSet;
 public class DB extends _Default implements Runnable {
 
     private Connection conn;
-    private String host = "<--my ip -->";
-    private String db = "android";
+    private String host = "";
+    private String db = "";
     private int port = 5432;
     private String user = "";
     private String pass = "";
-    private String url = "jdbc:postgresql://@s:@d:@s";
+    private String url = "jdbc:postgresql:";
 
 
     public DB() {

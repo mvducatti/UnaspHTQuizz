@@ -16,11 +16,11 @@ import java.util.ArrayList;
  * Created by Italo on 18/10/2017.
  */
 
-public class UsuarioAdapter extends ArrayAdapter<Usuario> {
+public class UsuarioAdapter extends ArrayAdapter<Quizz> {
     private Context context;
-    private ArrayList<Usuario> lista;
+    private ArrayList<Quizz> lista;
 
-    public UsuarioAdapter(Context context, ArrayList<Usuario> lista) {
+    public UsuarioAdapter(Context context, ArrayList<Quizz> lista) {
         super(context, 0, lista);
         this.context = context;
         this.lista = lista;
@@ -28,29 +28,33 @@ public class UsuarioAdapter extends ArrayAdapter<Usuario> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final Usuario itemPosicao = this.lista.get(position);
+        final Quizz itemPosicao = this.lista.get(position);
 
         convertView = LayoutInflater.from(this.context).inflate(R.layout.item_lista, null);
         final View layout = convertView;
 
-        TextView textView = (TextView) convertView.findViewById(R.id.textViewNome);
-        textView.setText(itemPosicao.getNome());
+        TextView textViewPergunta = (TextView) convertView.findViewById(R.id.textViewPergunta);
+        textViewPergunta.setText(itemPosicao.getPergunta());
 
-        TextView textViewEmail = (TextView) convertView.findViewById(R.id.textViewEmail);
-        textView.setText(itemPosicao.getEmail());
+        TextView textViewOpt1 = (TextView) convertView.findViewById(R.id.textViewOpt1);
+        textViewOpt1.setText(itemPosicao.getOpt1());
 
-        TextView textViewTelefone = (TextView) convertView.findViewById(R.id.textViewTelefone);
-        textView.setText(itemPosicao.getTelefone());
+        TextView textViewOpt2 = (TextView) convertView.findViewById(R.id.textViewOpt2);
+        textViewOpt2.setText(itemPosicao.getOpt2());
+
+        TextView textViewOptCerta = (TextView) convertView.findViewById(R.id.textViewOptCerta);
+        textViewOptCerta.setText(itemPosicao.getOptCerta());
 
         Button button = (Button) convertView.findViewById(R.id.buttonEditar);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, NovoActivity.class);
-                intent.putExtra("telefone", itemPosicao.getTelefone());
-                intent.putExtra("telefone", itemPosicao.getNome());
-                intent.putExtra("telefone", itemPosicao.getEmail());
-                intent.putExtra("telefone", itemPosicao.getId());
+                Intent intent = new Intent(context, NovoQuizz.class);
+                intent.putExtra("pergunta", itemPosicao.getPergunta());
+                intent.putExtra("Opção 1", itemPosicao.getOpt1());
+                intent.putExtra("Opção 2", itemPosicao.getOpt2());
+                intent.putExtra("Resposta Correta", itemPosicao.getOptCerta());
+                intent.putExtra("id", itemPosicao.getId());
                 context.startActivity(intent);
             }
         });

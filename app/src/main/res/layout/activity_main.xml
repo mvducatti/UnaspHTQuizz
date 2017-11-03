@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/telalogin"
     tools:context="com.example.marcos.unasphtquizz.MainActivity">
 
     <Button
@@ -14,25 +15,25 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
-        android:text="Novo"
+        android:onClick="abreNovo"
+        android:text="CRIAR QUIZZ"
         app:layout_constraintBottom_toTopOf="@+id/buttonLista"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        android:onClick="abreNovo"/>
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/buttonLista"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="334dp"
+        android:layout_marginBottom="164dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:text="Lista"
+        android:onClick="abreLista"
+        android:text="VISUALIZAR"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:onClick="abreLista"/>
+        app:layout_constraintRight_toRightOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

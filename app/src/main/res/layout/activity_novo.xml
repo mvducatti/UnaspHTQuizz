@@ -4,40 +4,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.marcos.unasphtquizz.NovoActivity">
+    android:background="@drawable/telalogin"
+    tools:context="com.example.marcos.unasphtquizz.NovoQuizz">
 
     <EditText
-        android:id="@+id/editTextNome"
+        android:id="@+id/editTextPergunta"
         android:layout_width="261dp"
         android:layout_height="41dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="196dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="51dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="8dp"
+        android:text="Pergunta"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.504" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextEmail"
+        android:id="@+id/editTextOpt1"
         android:layout_width="261dp"
         android:layout_height="38dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="12dp"
         android:ems="10"
         android:inputType="textEmailAddress"
-        android:text="E-mail"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNome"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="8dp"
+        android:text="Opção 1"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.503" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPergunta" />
 
     <EditText
-        android:id="@+id/editTextTelefone"
+        android:id="@+id/editTextOptCerta"
         android:layout_width="261dp"
         android:layout_height="42dp"
         android:layout_marginBottom="8dp"
@@ -46,12 +47,30 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="phone"
-        android:text="Telefone"
+        android:text="Resposta Correta"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextEmail"
+        app:layout_constraintTop_toBottomOf="@+id/editTextOpt2"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/editTextOpt2"
+        android:layout_width="261dp"
+        android:layout_height="42dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="phone"
+        android:text="Opção 2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextOpt1"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
@@ -61,12 +80,12 @@
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="88dp"
         android:layout_marginTop="8dp"
+        android:onClick="salvar"
         android:text="SALVAR"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTelefone"
-        app:layout_constraintVertical_bias="0.128"
-        android:onClick="salvar"/>
+        app:layout_constraintTop_toBottomOf="@+id/editTextOptCerta"
+        app:layout_constraintVertical_bias="0.627" />
 
     <Button
         android:id="@+id/buttonCancelar"
@@ -76,12 +95,12 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
+        android:onClick="cancelar"
         android:text="cancelar"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.082"
+        app:layout_constraintHorizontal_bias="0.123"
         app:layout_constraintLeft_toRightOf="@+id/buttonSalvar"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTelefone"
-        app:layout_constraintVertical_bias="0.128"
-        android:onClick="cancelar"/>
+        app:layout_constraintTop_toBottomOf="@+id/editTextOptCerta"
+        app:layout_constraintVertical_bias="0.627" />
 </android.support.constraint.ConstraintLayout>
