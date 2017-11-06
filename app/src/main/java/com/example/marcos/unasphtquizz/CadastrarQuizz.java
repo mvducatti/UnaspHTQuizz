@@ -7,9 +7,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class NovoQuizz extends AppCompatActivity {
+public class CadastrarQuizz extends AppCompatActivity {
 
-    private Quizz quizz;
+    private DBQuizz DBQuizz;
     private EditText editTextPergunta;
     private EditText editTextOpt1;
     private EditText editTextOpt2;
@@ -18,9 +18,9 @@ public class NovoQuizz extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_novo);
+        setContentView(R.layout.activity_cadastrarquizz);
 
-        this.quizz = new Quizz();
+        this.DBQuizz = new DBQuizz();
         this.editTextPergunta = (EditText) findViewById(R.id.editTextPergunta);
         this.editTextOpt1 = (EditText) findViewById(R.id.editTextOpt1);
         this.editTextOpt2 = (EditText) findViewById(R.id.editTextOpt1);
@@ -30,7 +30,7 @@ public class NovoQuizz extends AppCompatActivity {
         if (intent != null){
             Bundle bundle = intent.getExtras();
             if (bundle != null){
-                this.quizz.setId(bundle.getInt("id"));
+                this.DBQuizz.setId(bundle.getInt("id"));
                 this.editTextPergunta.setText(bundle.getString("pergunta"));
                 this.editTextOpt1.setText(bundle.getString("opt1"));
                 this.editTextOpt2.setText(bundle.getString("opt2"));
@@ -40,15 +40,15 @@ public class NovoQuizz extends AppCompatActivity {
     }
 
     public void salvar (View view){
-        this.quizz.setPergunta(this.editTextPergunta.getText().toString());
-        this.quizz.setOpt1(this.editTextOpt1.getText().toString());
-        this.quizz.setOpt2(this.editTextOpt2.getText().toString());
-        this.quizz.setOptCerta(this.editTextOptCerta.getText().toString());
+        this.DBQuizz.setPergunta(this.editTextPergunta.getText().toString());
+        this.DBQuizz.setOpt1(this.editTextOpt1.getText().toString());
+        this.DBQuizz.setOpt2(this.editTextOpt2.getText().toString());
+        this.DBQuizz.setOptCerta(this.editTextOptCerta.getText().toString());
 
-        this.quizz.salvar();
+        this.DBQuizz.salvar();
 
-        Toast.makeText(this,this.quizz.get_mensagem(), Toast.LENGTH_LONG).show();
-        if (quizz.is_status())
+        Toast.makeText(this,this.DBQuizz.get_mensagem(), Toast.LENGTH_LONG).show();
+        if (DBQuizz.is_status())
             finish();
     }
 

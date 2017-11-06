@@ -18,7 +18,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void criarUsuario(View view){
-        Intent intent =  new Intent(this, CadastroUsuario.class);
+        Intent intent =  new Intent(this, CadastrarUsuario.class);
         startActivity(intent);
     }
 }

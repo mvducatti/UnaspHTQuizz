@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * Created by Italo on 17/10/2017.
  */
 
-public class Quizz extends _Default {
+public class DBQuizz extends _Default {
 
     private int id;
     private String pergunta;
@@ -15,7 +15,7 @@ public class Quizz extends _Default {
     private String opt2;
     private String optCerta;
 
-    public Quizz(){
+    public DBQuizz(){
         super();
         this.id = -1;
         this.opt1 = "";
@@ -24,14 +24,14 @@ public class Quizz extends _Default {
         this.optCerta = "";
     }
 
-    public ArrayList<Quizz> getLista(){
+    public ArrayList<DBQuizz> getLista(){
         DB db = new DB();
-        ArrayList<Quizz> lista = new ArrayList<>();
+        ArrayList<DBQuizz> lista = new ArrayList<>();
         try {
             ResultSet resultSet = db.select("SELECT * FROM quizz");
             if (resultSet != null){
                 while (resultSet.next()){
-                    Quizz obj = new Quizz();
+                    DBQuizz obj = new DBQuizz();
                     obj.setId(resultSet.getInt("id"));
                     obj.setPergunta(resultSet.getString("pergunta"));
                     obj.setOpt1(resultSet.getString("opt1"));

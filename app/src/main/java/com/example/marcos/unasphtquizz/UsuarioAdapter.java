@@ -16,11 +16,11 @@ import java.util.ArrayList;
  * Created by Italo on 18/10/2017.
  */
 
-public class UsuarioAdapter extends ArrayAdapter<Quizz> {
+public class UsuarioAdapter extends ArrayAdapter<DBQuizz> {
     private Context context;
-    private ArrayList<Quizz> lista;
+    private ArrayList<DBQuizz> lista;
 
-    public UsuarioAdapter(Context context, ArrayList<Quizz> lista) {
+    public UsuarioAdapter(Context context, ArrayList<DBQuizz> lista) {
         super(context, 0, lista);
         this.context = context;
         this.lista = lista;
@@ -28,7 +28,7 @@ public class UsuarioAdapter extends ArrayAdapter<Quizz> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final Quizz itemPosicao = this.lista.get(position);
+        final DBQuizz itemPosicao = this.lista.get(position);
 
         convertView = LayoutInflater.from(this.context).inflate(R.layout.item_lista, null);
         final View layout = convertView;
@@ -49,7 +49,7 @@ public class UsuarioAdapter extends ArrayAdapter<Quizz> {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, NovoQuizz.class);
+                Intent intent = new Intent(context, CadastrarQuizz.class);
                 intent.putExtra("pergunta", itemPosicao.getPergunta());
                 intent.putExtra("Opção 1", itemPosicao.getOpt1());
                 intent.putExtra("Opção 2", itemPosicao.getOpt2());

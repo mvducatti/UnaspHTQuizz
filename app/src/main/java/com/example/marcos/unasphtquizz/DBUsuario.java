@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * Created by Italo on 03/11/2017.
  */
 
-public abstract class Usuario extends _Default{
+public abstract class DBUsuario extends _Default{
 
         private int id;
         private String login;
@@ -15,7 +15,7 @@ public abstract class Usuario extends _Default{
         private String nome;
         private int tipoUsusario;
 
-        public Usuario(int tipoUsusario){
+        public DBUsuario(int tipoUsusario){
             super();
             this.id = -1;
             this.nome = "";
@@ -24,14 +24,14 @@ public abstract class Usuario extends _Default{
             this.tipoUsusario = tipoUsusario;
         }
 
-    public ArrayList<Usuario> getLista(){
+    public ArrayList<DBUsuario> getLista(){
         DB db = new DB();
-        ArrayList<Usuario> lista = new ArrayList<>();
+        ArrayList<DBUsuario> lista = new ArrayList<>();
         try {
             ResultSet resultSet = db.select("SELECT * FROM usuario");
             if (resultSet != null){
                 while (resultSet.next()){
-                    Usuario obj = null;
+                    DBUsuario obj = null;
 
                     if (tipoUsusario == 1) {
                         obj = new Professor();
@@ -63,7 +63,7 @@ public abstract class Usuario extends _Default{
                 comando = String.format("INSERT INTO usuarios (nome,login,senha,tipo) VALUES ('%s','%s','%s','%d');",
                         this.getNome(),this.getLogin(),this.getSenha(),this.tipoUsusario);
             }else {
-                comando = String.format("UPDATE usuarios SET login = nome ='%s', login ='%s', senha = '%s', tipo = '%d' WHERE id = %d;",
+                comando = String.format("UPDATE usuarios SET nome ='%s', login ='%s', senha = '%s', tipo = '%d' WHERE id = %d;",
                         this.getNome(), this.getLogin(),this.getSenha(),this.tipoUsusario);
             }
             DB db =  new DB();

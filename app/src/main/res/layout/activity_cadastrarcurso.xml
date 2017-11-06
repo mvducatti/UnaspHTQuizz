@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/telalogin"
-    tools:context="com.example.marcos.unasphtquizz.CriarCurso">
+    tools:context="com.example.marcos.unasphtquizz.CadastrarCurso">
 
     <EditText
         android:id="@+id/editTextNomedoCurso"
@@ -31,7 +31,8 @@
         android:text="CRIAR"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextNomedoCurso"
-        android:layout_marginLeft="84dp" />
+        android:layout_marginLeft="84dp"
+        android:onClick="criarcurso"/>
 
     <Button
         android:id="@+id/button8"
@@ -47,7 +48,8 @@
         app:layout_constraintHorizontal_bias="0.247"
         app:layout_constraintStart_toEndOf="@+id/button7"
         app:layout_constraintTop_toBottomOf="@+id/editTextNomedoCurso"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        android:onClick="cancelarcurso"/>
 
     <Button
         android:id="@+id/button9"
@@ -63,5 +65,6 @@
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button7"
-        app:layout_constraintVertical_bias="0.047" />
+        app:layout_constraintVertical_bias="0.047"
+        android:onClick="visualizarcurso"/>
 </android.support.constraint.ConstraintLayout>

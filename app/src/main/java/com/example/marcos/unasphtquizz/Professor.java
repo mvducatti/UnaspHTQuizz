@@ -4,7 +4,7 @@ package com.example.marcos.unasphtquizz;
  * Created by Italo on 05/11/2017.
  */
 
-public class Professor extends Usuario{
+public class Professor extends DBUsuario {
 
     public Professor() {
         super(1);

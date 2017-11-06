@@ -14,7 +14,7 @@ public class MainActivity extends Activity {
     }
 
     public void abreNovo(View view){
-        Intent intent =  new Intent(this, NovoQuizz.class);
+        Intent intent =  new Intent(this, CadastrarQuizz.class);
         startActivity(intent);
     }
 

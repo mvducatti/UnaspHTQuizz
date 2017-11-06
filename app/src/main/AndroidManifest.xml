@@ -18,13 +18,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NovoQuizz" />
+        <activity android:name=".CadastrarQuizz" />
         <activity android:name=".ListaActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".CadastroUsuario" />
+        <activity android:name=".CadastrarUsuario" />
         <activity android:name=".MenuJogo" />
         <activity android:name=".Jogando" />
-        <activity android:name=".CriarCurso"></activity>
+        <activity android:name=".CadastrarCurso"></activity>
     </application>
 
 </manifest>

@@ -14,7 +14,7 @@ public class ListaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lista);
 
         this.listViewUsuario = (ListView) findViewById(R.id.listviewUsuario);
-        this.listViewUsuario.setAdapter(new UsuarioAdapter(this, new Quizz().getLista()));
+        this.listViewUsuario.setAdapter(new UsuarioAdapter(this, new DBQuizz().getLista()));
     }
 }
 
