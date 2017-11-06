@@ -23,7 +23,8 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".CadastroUsuario" />
         <activity android:name=".MenuJogo" />
-        <activity android:name=".Jogando"></activity>
+        <activity android:name=".Jogando" />
+        <activity android:name=".CriarCurso"></activity>
     </application>
 
 </manifest>

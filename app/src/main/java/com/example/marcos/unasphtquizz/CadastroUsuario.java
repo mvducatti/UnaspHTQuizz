@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public abstract class CadastroUsuario extends AppCompatActivity {
+public class CadastroUsuario extends AppCompatActivity {
 
     private Usuario usuario;
     private EditText editTextCDLogin;
@@ -49,10 +49,12 @@ public abstract class CadastroUsuario extends AppCompatActivity {
                 if(checkedId==R.id.radioButtonAluno)
                 {
                     PIN.setEnabled(false);
+                    usuario = new Aluno();
                 }
                 if(checkedId==R.id.radioButtonProf)
                 {
                     PIN.setEnabled(true);
+                    usuario = new Professor();
                 }
             }
     });

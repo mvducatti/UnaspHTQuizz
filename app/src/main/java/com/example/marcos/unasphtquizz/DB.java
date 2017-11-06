@@ -16,7 +16,7 @@ public class DB extends _Default implements Runnable {
     private int port = 5432;
     private String user = "";
     private String pass = "";
-    private String url = "jdbc:postgresql:";
+    private String url = "jdbc:postgresql:marcosducatti.postgresql.dbaas.com.br";
 
 
     public DB() {
