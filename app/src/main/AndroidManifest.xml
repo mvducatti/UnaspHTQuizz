@@ -21,7 +21,9 @@
         <activity android:name=".NovoQuizz" />
         <activity android:name=".ListaActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".CadastroUsuario"></activity>
+        <activity android:name=".CadastroUsuario" />
+        <activity android:name=".MenuJogo" />
+        <activity android:name=".Jogando"></activity>
     </application>
 
 </manifest>
