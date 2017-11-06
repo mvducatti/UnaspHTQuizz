@@ -38,6 +38,24 @@ public abstract class CadastroUsuario extends AppCompatActivity {
         aluno = (RadioButton) findViewById(R.id.radioButtonAluno);
         professor = (RadioButton) findViewById(R.id.radioButtonProf);
         grupo = (RadioGroup) findViewById(R.id.radioGroup);
+        PIN = (EditText) findViewById(R.id.editTextPIN);
+
+        PIN.setEnabled(false);
+
+        grupo.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+                if(checkedId==R.id.radioButtonAluno)
+                {
+                    PIN.setEnabled(false);
+                }
+                if(checkedId==R.id.radioButtonProf)
+                {
+                    PIN.setEnabled(true);
+                }
+            }
+    });
 
         Intent intent = getIntent();
         if (intent != null){
