@@ -44,6 +44,7 @@ public abstract class DBUsuario extends _Default{
                     obj.setNome(resultSet.getString("nome"));
                     obj.setLogin(resultSet.getString("login"));
                     obj.setSenha(resultSet.getString("senha"));
+                    obj.setTipoUsusario(Integer.parseInt(resultSet.getString("tipousuario")));
 
                     lista.add(obj);
                     obj = null;
@@ -113,5 +114,12 @@ public abstract class DBUsuario extends _Default{
             this.senha = senha;
         }
 
+    public int getTipoUsusario() {
+        return tipoUsusario;
     }
+
+    public void setTipoUsusario(int tipoUsusario) {
+        this.tipoUsusario = tipoUsusario;
+    }
+}
 
