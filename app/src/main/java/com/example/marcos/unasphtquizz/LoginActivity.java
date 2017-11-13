@@ -1,7 +1,9 @@
 package com.example.marcos.unasphtquizz;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -32,10 +34,23 @@ public class LoginActivity extends AppCompatActivity {
         editSenha = (EditText) findViewById(R.id.editText2);
     }
 
-    public void login(){
+    public void exibirTexto(String titulo, String txt){
+        AlertDialog alertDialog = new AlertDialog.Builder(LoginActivity.this).create();
+        alertDialog.setTitle(titulo);
+        alertDialog.setMessage(txt);
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
+    }
+
+    public void login(View view){
         Connection con = null;
         PreparedStatement pst;
-        String sel = "SELECT 'login', 'senha', 'tipousuario' FROM 'usuario' WHERE 'login' = ? AND 'senha' = ?";
+        String sel = "SELECT login, senha, tipousuario FROM usuario WHERE login == '?' AND senha == '?'";
         ResultSet rs = null;
 
         try {
@@ -69,13 +84,18 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            exibirTexto("Erro", e.getMessage());
         }
     }
 
 
     public void criarUsuario(View view){
-        Intent intent =  new Intent(this, CadastrarUsuario.class);
-        startActivity(intent);
+        try {
+            Intent intent = new Intent(this, CadastrarUsuario.class);
+            startActivity(intent);
+        }
+        catch (Exception e){
+            exibirTexto("Erro", e.getMessage());
+        }
     }
 }

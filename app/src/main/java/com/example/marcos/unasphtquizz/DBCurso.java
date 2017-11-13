@@ -1,6 +1,7 @@
 package com.example.marcos.unasphtquizz;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -42,7 +43,7 @@ public class DBCurso extends _Default{
         return lista;
     }
 
-    public void salvar(){
+    public void salvar() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         String comando = "";
         if (this.getId() == -1){
             comando = String.format("INSERT INTO usuarios (nome,login,senha,tipo) VALUES ('%s');",
@@ -53,17 +54,13 @@ public class DBCurso extends _Default{
         }
         DB db =  new DB();
         db.execute(comando);
-        this._mensagem = db._mensagem;
-        this._status = db._status;
     }
 
-    public void apagar(){
+    public void apagar() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         String comando = String.format("DELETE FROM curso WHERE id = %d;", this.getId());
 
         DB db =  new DB();
         db.execute(comando);
-        this._mensagem = db._mensagem;
-        this._status = db._status;
     }
 
     public int getId() {
@@ -82,4 +79,3 @@ public class DBCurso extends _Default{
         this.nomedocurso = nomedocurso;
     }
 }
-

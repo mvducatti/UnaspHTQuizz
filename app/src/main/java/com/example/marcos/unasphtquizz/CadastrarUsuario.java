@@ -1,6 +1,8 @@
 package com.example.marcos.unasphtquizz;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -20,6 +22,18 @@ public class CadastrarUsuario extends AppCompatActivity {
     private EditText PIN;
     private RadioGroup grupo;
 
+    public void exibirTexto(String titulo, String txt){
+        AlertDialog alertDialog = new AlertDialog.Builder(CadastrarUsuario.this).create();
+        alertDialog.setTitle(titulo);
+        alertDialog.setMessage(txt);
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,16 +79,20 @@ public class CadastrarUsuario extends AppCompatActivity {
     }
 
     public void salvar(View view) {
+        try {
+            this.DBUsuario.setNome(this.editTextCDNome.getText().toString());
+            this.DBUsuario.setLogin(this.editTextCDLogin.getText().toString());
+            this.DBUsuario.setSenha(this.editTextCDSenha.getText().toString());
 
-        this.DBUsuario.setNome(this.editTextCDNome.getText().toString());
-        this.DBUsuario.setLogin(this.editTextCDLogin.getText().toString());
-        this.DBUsuario.setSenha(this.editTextCDSenha.getText().toString());
+            this.DBUsuario.salvar(PIN.getText().toString());
 
-        this.DBUsuario.salvar(PIN.getText().toString());
-
-        Toast.makeText(this,this.DBUsuario.get_mensagem(), Toast.LENGTH_LONG).show();
-        if (DBUsuario.is_status())
-            finish();
+            Toast.makeText(this, this.DBUsuario.get_mensagem(), Toast.LENGTH_LONG).show();
+            if (DBUsuario.is_status())
+                finish();
+        }
+        catch (Exception e){
+            exibirTexto("Erro", e.getMessage());
+        }
     }
 
     public void cdCancelar(View view) {

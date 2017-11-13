@@ -1,84 +1,59 @@
 package com.example.marcos.unasphtquizz;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Italo on 17/10/2017.
  */
 
-public class DB extends _Default implements Runnable {
+public class DB{
 
-    private Connection conn;
-    private String host = "";
-    private String db = "";
-    private int port = 5432;
-    private String user = "";
-    private String pass = "";
-    private String url = "jdbc:postgresql:marcosducatti.postgresql.dbaas.com.br";
-
+    private static Connection conn;
+    private static String host = "";
+    private static String db = "";
+    private static int port = 5432;
+    private static String user = "";
+    private static String pass = "";
+    private static String url = "";
 
     public DB() {
         super();
-        this.url = String.format(this.url, this.host, this.port, this.db);
-
-        this.conecta();
-        this.desconecta();
     }
 
-    @Override
-    public void run() {
-        try {
-            Class.forName("org.postgresql.Driver");
-            this.conn = DriverManager.getConnection(this.url, this.user, this.pass);
-        } catch (Exception e) {
-            this._mensagem = e.getMessage();
-            this._status = false;
-        }
+    private static Connection conecta() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        Class.forName("org.postgresql.Driver").newInstance();
+        conn = DriverManager.getConnection(url, user, pass);
+        return conn;
     }
-
-    private void conecta() {
-        Thread thread = new Thread(this);
-        thread.start();
-        try {
-            thread.join();
-        } catch (Exception e) {
-            this._mensagem = e.getMessage();
-            this._status = false;
-        }
-    }
-    private void desconecta(){
-        if (this.conn != null){
+    private static void desconecta(){
+        if (conn != null){
             try{
-                this.conn.close();
+                conn.close();
             }catch (Exception e){
-
             }finally {
-                this.conn = null;
+                conn = null;
             }
         }
     }
-    public ResultSet select(String query){
-        this.conecta();
+
+    public static ResultSet select(String query) throws SQLException, ClassNotFoundException, InterruptedException, ExecutionException, InstantiationException, IllegalAccessException{
         ResultSet resultSet = null;
-        try {
-            resultSet = new ExecuteDB(this.conn, query).execute().get();
-        }catch (Exception e){
-        this._status = false;
-            this._mensagem = e.getMessage();
-        }
+        conecta();
+        resultSet = new ExecuteDB(conn, query).execute().get();
         return resultSet;
     }
-    public ResultSet execute(String query){
-        this.conecta();
+
+    public static ResultSet execute(String query) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         ResultSet resultSet = null;
-        try {
-            resultSet = new ExecuteDB(this.conn, query).execute().get();
-        }catch (Exception e){
-            this._status = false;
-            this._mensagem = e.getMessage();
-        }
+        conecta();
+        resultSet = conecta().prepareStatement(query).executeQuery();;
         return resultSet;
     }
 }

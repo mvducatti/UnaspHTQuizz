@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -27,7 +28,7 @@ public class UsuarioAdapter extends ArrayAdapter<DBQuizz> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent){
         final DBQuizz itemPosicao = this.lista.get(position);
 
         convertView = LayoutInflater.from(this.context).inflate(R.layout.item_lista, null);
@@ -62,7 +63,11 @@ public class UsuarioAdapter extends ArrayAdapter<DBQuizz> {
         buttonDeletar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                itemPosicao.apagar();
+                try {
+                    itemPosicao.apagar();
+                } catch (Exception e) {
+                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT);
+                }
                 if (itemPosicao._status)
                     layout.setVisibility(View.GONE);
                 else {

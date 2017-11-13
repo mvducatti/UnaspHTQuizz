@@ -1,6 +1,9 @@
 package com.example.marcos.unasphtquizz;
 
+import android.app.AlertDialog;
+
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -9,20 +12,20 @@ import java.util.ArrayList;
 
 public abstract class DBUsuario extends _Default{
 
-        private int id;
-        private String login;
-        private String senha;
-        private String nome;
-        private int tipoUsusario;
+    private int id;
+    private String login;
+    private String senha;
+    private String nome;
+    private int tipoUsusario;
 
-        public DBUsuario(int tipoUsusario){
-            super();
-            this.id = -1;
-            this.nome = "";
-            this.login = "";
-            this.senha = "";
-            this.tipoUsusario = tipoUsusario;
-        }
+    public DBUsuario(int tipoUsusario){
+        super();
+        this.id = -1;
+        this.nome = "";
+        this.login = "";
+        this.senha = "";
+        this.tipoUsusario = tipoUsusario;
+    }
 
     public ArrayList<DBUsuario> getLista(){
         DB db = new DB();
@@ -58,29 +61,24 @@ public abstract class DBUsuario extends _Default{
         return lista;
     }
 
-        public void salvar(String teste){
-            String comando = "";
-            if (this.getId() == -1){
-                comando = String.format("INSERT INTO usuarios (nome,login,senha,tipo) VALUES ('%s','%s','%s','%d');",
-                        this.getNome(),this.getLogin(),this.getSenha(),this.tipoUsusario);
-            }else {
-                comando = String.format("UPDATE usuarios SET nome ='%s', login ='%s', senha = '%s', tipo = '%d' WHERE id = %d;",
-                        this.getNome(), this.getLogin(),this.getSenha(),this.tipoUsusario);
-            }
-            DB db =  new DB();
-            db.execute(comando);
-            this._mensagem = db._mensagem;
-            this._status = db._status;
+    public void salvar(String teste) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+        String comando = "";
+        if (this.getId() == -1) {
+            comando = String.format("INSERT INTO usuarios (nome,login,senha,tipo) VALUES ('%s','%s','%s','%d');",
+                    this.getNome(), this.getLogin(), this.getSenha(), this.tipoUsusario);
+        } else {
+            comando = String.format("UPDATE usuarios SET nome ='%s', login ='%s', senha = '%s', tipo = '%d' WHERE id = %d;",
+                    this.getNome(), this.getLogin(), this.getSenha(), this.tipoUsusario);
         }
+        DB db = new DB();
+        db.execute(comando);
+    }
 
-        public void apagar(){
-            String comando = String.format("DELETE FROM usuario WHERE id = %d;", this.getId());
-
-            DB db =  new DB();
-            db.execute(comando);
-            this._mensagem = db._mensagem;
-            this._status = db._status;
-        }
+    public void apagar() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+        String comando = String.format("DELETE FROM usuario WHERE id = %d;", this.getId());
+        DB db =  new DB();
+        db.execute(comando);
+    }
 
         public int getId() {
             return id;
