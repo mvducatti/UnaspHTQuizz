@@ -8,21 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Connection conn = null;
-    PreparedStatement pst = null;
-    ResultSet rs = null;
     private EditText editLogin, editSenha;
 
     @SuppressLint("WrongViewCast")
@@ -30,8 +20,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        editLogin = (EditText) findViewById(R.id.textView);
-        editSenha = (EditText) findViewById(R.id.editText2);
+        editLogin = (EditText) findViewById(R.id.loginText);
+        editSenha = (EditText) findViewById(R.id.SenhaText);
     }
 
     public void exibirTexto(String titulo, String txt){
@@ -48,29 +38,22 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void login(View view){
-        Connection con = null;
-        PreparedStatement pst;
-        String sel = "SELECT login, senha, tipousuario FROM usuario WHERE login == '?' AND senha == '?'";
-        ResultSet rs = null;
+        ResultSet rs;
 
         try {
-            con = DriverManager.getConnection("jdbc:postgresql:marcosducatti.postgresql.dbaas.com.br", "marcosducatti", "ducatti2017");
-            pst = con.prepareStatement(sel);
-            pst.setString(1, String.valueOf(editLogin.getText()));
-            pst.setString(2, String.valueOf(editSenha.getText()));
-            rs = pst.executeQuery();
-
+            String testelogin = editLogin.getText().toString();
+            String testesenha = editSenha.getText().toString();
+            rs = DB.execute("SELECT login, senha, tipousuario FROM usuario WHERE login = '" + testelogin + "' AND senha = '" + testesenha + "'");
             while (rs.next()){
                 String login = rs.getString("login");
                 String senha = rs.getString("senha");;
-                int tipo = Integer.parseInt(rs.getString("login"));
-
-                if (login.equals(editLogin.getText().toString())){
-                    if (senha.equals(editSenha.getText().toString())){
+                int tipo = Integer.parseInt(rs.getString("tipousuario"));
+                if (login.equals(testelogin)){
+                    if (senha.equals(testesenha)){
                         Intent intent = null;
                         switch (tipo){
                             case 1:
-                                intent =  new Intent(this, Jogando.class);
+                                intent =  new Intent(this, MenuJogo.class);
                                 break;
                             case 2:
                                 intent =  new Intent(this, CadastrarQuizz.class);
@@ -80,10 +63,15 @@ public class LoginActivity extends AppCompatActivity {
                                 break;
                         }
                         startActivity(intent);
+                        return;
                     }
                 }
             }
-        } catch (SQLException e) {
+            throw new LoginException("Usuário ou senha incorretos");
+        }catch (LoginException e){
+            exibirTexto("Erro de Login", e.getMessage());
+        }
+        catch (Exception e) {
             exibirTexto("Erro", e.getMessage());
         }
     }

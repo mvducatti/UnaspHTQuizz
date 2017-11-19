@@ -8,13 +8,16 @@ import java.util.ArrayList;
  * Created by Italo on 17/10/2017.
  */
 
-public class DBQuizz extends _Default {
+public class DBQuizz{
 
     private int id;
     private String pergunta;
     private String opt1;
     private String opt2;
     private String optCerta;
+
+    public String _mensagem;
+    public boolean _status;
 
     public DBQuizz(){
         super();
@@ -45,7 +48,6 @@ public class DBQuizz extends _Default {
             }
         }catch (Exception ex){
             this._mensagem = ex.getMessage();
-            this._status = false;
             this._status = false;
         }
         return lista;

@@ -7,6 +7,6 @@ package com.example.marcos.unasphtquizz;
 public class Aluno extends DBUsuario {
 
     public Aluno() {
-        super(2);
+        super(1);
     }
 }

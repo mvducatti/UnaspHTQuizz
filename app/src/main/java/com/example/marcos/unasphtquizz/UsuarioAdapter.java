@@ -34,16 +34,16 @@ public class UsuarioAdapter extends ArrayAdapter<DBQuizz> {
         convertView = LayoutInflater.from(this.context).inflate(R.layout.item_lista, null);
         final View layout = convertView;
 
-        TextView textViewPergunta = (TextView) convertView.findViewById(R.id.textViewPergunta);
+        TextView textViewPergunta = convertView.findViewById(R.id.textViewPergunta);
         textViewPergunta.setText(itemPosicao.getPergunta());
 
-        TextView textViewOpt1 = (TextView) convertView.findViewById(R.id.textViewOpt1);
+        TextView textViewOpt1 = convertView.findViewById(R.id.textViewOpt1);
         textViewOpt1.setText(itemPosicao.getOpt1());
 
-        TextView textViewOpt2 = (TextView) convertView.findViewById(R.id.textViewOpt2);
+        TextView textViewOpt2 = convertView.findViewById(R.id.textViewOpt2);
         textViewOpt2.setText(itemPosicao.getOpt2());
 
-        TextView textViewOptCerta = (TextView) convertView.findViewById(R.id.textViewOptCerta);
+        TextView textViewOptCerta = convertView.findViewById(R.id.textViewOptCerta);
         textViewOptCerta.setText(itemPosicao.getOptCerta());
 
         Button button = (Button) convertView.findViewById(R.id.buttonEditar);
@@ -71,7 +71,7 @@ public class UsuarioAdapter extends ArrayAdapter<DBQuizz> {
                 if (itemPosicao._status)
                     layout.setVisibility(View.GONE);
                 else {
-                    Toast.makeText(context, itemPosicao.get_mensagem(), Toast.LENGTH_SHORT);
+                    Toast.makeText(context, itemPosicao._mensagem, Toast.LENGTH_SHORT);
                 }
             }
         });

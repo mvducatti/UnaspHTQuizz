@@ -28,6 +28,8 @@ public class MenuJogo extends AppCompatActivity {
         setContentView(R.layout.menujogo);
 
         selecioneamateria = (Spinner) findViewById(R.id.spinner2);
+
+        selecionando();
     }
 
     public void exibirTexto(String titulo, String txt){
@@ -45,15 +47,13 @@ public class MenuJogo extends AppCompatActivity {
 
     public void selecionando () {
         try{
-            PreparedStatement pst;
-            String sel = "SELECT 'nomedamateria' FROM 'materia' WHERE 'nomedamateria' = ?";
-            ResultSet rs = null;
-            rs = DB.select(sel);
+            String sel = "SELECT * FROM curso";
+            ResultSet rs = DB.select(sel);
             ArrayList<String> array = new ArrayList<>();
 
             while(rs.next())
             {
-                array.add(rs.getString("materia"));
+                array.add(rs.getString("nomedocurso"));
             }
 
             ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, array);

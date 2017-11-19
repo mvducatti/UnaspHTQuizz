@@ -10,13 +10,16 @@ import java.util.ArrayList;
  * Created by Italo on 03/11/2017.
  */
 
-public abstract class DBUsuario extends _Default{
+public abstract class DBUsuario{
 
     private int id;
     private String login;
     private String senha;
     private String nome;
-    private int tipoUsusario;
+    private int tipoUsuario;
+
+    public String _mensagem;
+    public boolean _status;
 
     public DBUsuario(int tipoUsusario){
         super();
@@ -24,7 +27,7 @@ public abstract class DBUsuario extends _Default{
         this.nome = "";
         this.login = "";
         this.senha = "";
-        this.tipoUsusario = tipoUsusario;
+        this.tipoUsuario = tipoUsusario;
     }
 
     public ArrayList<DBUsuario> getLista(){
@@ -34,12 +37,13 @@ public abstract class DBUsuario extends _Default{
             ResultSet resultSet = db.select("SELECT * FROM usuario");
             if (resultSet != null){
                 while (resultSet.next()){
+
                     DBUsuario obj = null;
 
-                    if (tipoUsusario == 1) {
+                    if (tipoUsuario == 1) {
                         obj = new Professor();
                     }
-                    if (tipoUsusario == 2) {
+                    if (tipoUsuario == 2) {
                         obj = new Aluno();
                     }
 
@@ -48,30 +52,29 @@ public abstract class DBUsuario extends _Default{
                     obj.setLogin(resultSet.getString("login"));
                     obj.setSenha(resultSet.getString("senha"));
                     obj.setTipoUsusario(Integer.parseInt(resultSet.getString("tipousuario")));
-
                     lista.add(obj);
+
                     obj = null;
                 }
             }
         }catch (Exception ex){
             this._mensagem = ex.getMessage();
             this._status = false;
-            this._status = false;
         }
         return lista;
     }
 
-    public void salvar(String teste) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+    public void salvar(String teste) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, LoginException {
         String comando = "";
         if (this.getId() == -1) {
-            comando = String.format("INSERT INTO usuarios (nome,login,senha,tipo) VALUES ('%s','%s','%s','%d');",
-                    this.getNome(), this.getLogin(), this.getSenha(), this.tipoUsusario);
+            comando = String.format("INSERT INTO usuario (nome,login,senha,tipousuario) VALUES ('%s','%s','%s',%d);",
+                    this.getNome(), this.getLogin(), this.getSenha(), this.tipoUsuario);
         } else {
-            comando = String.format("UPDATE usuarios SET nome ='%s', login ='%s', senha = '%s', tipo = '%d' WHERE id = %d;",
-                    this.getNome(), this.getLogin(), this.getSenha(), this.tipoUsusario);
+            comando = String.format("UPDATE usuario SET nome ='%s', login ='%s', senha = '%s', tipo = '%d' WHERE id = %d;",
+                    this.getNome(), this.getLogin(), this.getSenha(), this.tipoUsuario, this.getId());
         }
         DB db = new DB();
-        db.execute(comando);
+        db.update(comando);
     }
 
     public void apagar() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
@@ -80,44 +83,44 @@ public abstract class DBUsuario extends _Default{
         db.execute(comando);
     }
 
-        public int getId() {
-            return id;
-        }
+    public int getId() {
+        return id;
+    }
 
-        public void setId(int id) {
-            this.id = id;
-        }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-        public String getNome() {
+    public String getNome() {
         return nome;
     }
 
-        public void setNome(String nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
-        public String getLogin() {
-            return login;
-        }
+    public String getLogin() {
+        return login;
+    }
 
-        public void setLogin(String login) {
-            this.login = login;
-        }
+    public void setLogin(String login) {
+        this.login = login;
+    }
 
-        public String getSenha() {
-            return senha;
-        }
+    public String getSenha() {
+        return senha;
+    }
 
-        public void setSenha(String senha) {
-            this.senha = senha;
-        }
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
 
     public int getTipoUsusario() {
-        return tipoUsusario;
+        return tipoUsuario;
     }
 
     public void setTipoUsusario(int tipoUsusario) {
-        this.tipoUsusario = tipoUsusario;
+        this.tipoUsuario = tipoUsusario;
     }
 }
 

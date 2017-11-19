@@ -29,5 +29,4 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
     compile 'postgresql:postgresql:9.1-901-1.jdbc4'
-    compileOnly files('libs/postgresql-42.1.4.jar')
 }

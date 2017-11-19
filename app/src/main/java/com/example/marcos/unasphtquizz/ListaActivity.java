@@ -11,7 +11,7 @@ public class ListaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lista);
+        setContentView(R.layout.item_lista);
 
         this.listViewUsuario = (ListView) findViewById(R.id.listviewUsuario);
         this.listViewUsuario.setAdapter(new UsuarioAdapter(this, new DBQuizz().getLista()));

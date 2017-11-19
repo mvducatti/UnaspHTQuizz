@@ -10,28 +10,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class CadastrarCurso extends AppCompatActivity {
 
-    private DBCurso DBCurso;
-    private EditText edtTextNovoCurso;
-    private Button  btnCriarCurso, btnCancelarCurso, btnVisualizar;
+    private DBCurso dbCurso;
+    private EditText editTextNovoCurso;
+    public String _mensagem;
+    public boolean _status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastrarcurso);
-        edtTextNovoCurso = (EditText) findViewById(R.id.editTextNomedoCurso);
 
-        Intent intent = getIntent();
-        if (intent != null){
-            Bundle bundle = intent.getExtras();
-            if (bundle != null){
-                this.DBCurso.setId(bundle.getInt("id"));
-                this.edtTextNovoCurso.setText(bundle.getString("novo curso"));
-            }
-        }
+        editTextNovoCurso = (EditText) findViewById(R.id.editTextNomedoCurso);
     }
 
     public void exibirTexto(String titulo, String txt){
@@ -48,14 +42,15 @@ public class CadastrarCurso extends AppCompatActivity {
     }
 
     public void criarcurso (View view){
+        ResultSet rs;
         try {
-            this.DBCurso.setNomedocurso(this.edtTextNovoCurso.getText().toString());
+            String criar = editTextNovoCurso.getText().toString();
 
-            this.DBCurso.salvar();
-
-            Toast.makeText(this, this.DBCurso.get_mensagem(), Toast.LENGTH_LONG).show();
-            if (DBCurso.is_status())
-                finish();
+            if (!(editTextNovoCurso.getText().toString().equals("") || editTextNovoCurso.getText() == null)){
+                DB.update("INSERT INTO curso (nomedocurso) VALUES ('" + criar + "')");
+                exibirTexto("CRIAÇÃO DE TABELAS", "Tabela " + editTextNovoCurso.getText() + " criada com sucesso");
+                editTextNovoCurso.setText("");
+            }
         }
         catch (Exception e){
             exibirTexto("Erro", e.getMessage());
@@ -63,12 +58,12 @@ public class CadastrarCurso extends AppCompatActivity {
     }
 
     public void cancelarcurso (View view){
-    finish();
+        finish();
     }
 
     public void visualizarcurso (View view){
         try {
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, ListaActivity.class);
             startActivity(intent);
         }
         catch (Exception e){

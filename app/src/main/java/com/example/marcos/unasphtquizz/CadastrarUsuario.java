@@ -6,6 +6,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -13,7 +14,7 @@ import android.widget.Toast;
 
 public class CadastrarUsuario extends AppCompatActivity {
 
-    private DBUsuario DBUsuario;
+    private DBUsuario dbUsuario;
     private EditText editTextCDLogin;
     private EditText editTextCDSenha;
     private EditText editTextCDNome;
@@ -21,6 +22,8 @@ public class CadastrarUsuario extends AppCompatActivity {
     private RadioButton professor;
     private EditText PIN;
     private RadioGroup grupo;
+    public String _mensagem;
+    public boolean _status;
 
     public void exibirTexto(String titulo, String txt){
         AlertDialog alertDialog = new AlertDialog.Builder(CadastrarUsuario.this).create();
@@ -40,55 +43,65 @@ public class CadastrarUsuario extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastrarusuario);
 
-        this.editTextCDNome = (EditText) findViewById(R.id.editTextPergunta);
-        this.editTextCDLogin = (EditText) findViewById(R.id.editTextOpt1);
-        this.editTextCDSenha = (EditText) findViewById(R.id.editTextOpt1);
+        dbUsuario = new Aluno();
+
+        editTextCDNome = (EditText) findViewById(R.id.editTextCDNome);
+        editTextCDLogin = (EditText) findViewById(R.id.editTextCDLogin);
+        editTextCDSenha = (EditText) findViewById(R.id.editTextCDSenha);
         aluno = (RadioButton) findViewById(R.id.radioButtonAluno);
         professor = (RadioButton) findViewById(R.id.radioButtonProf);
         grupo = (RadioGroup) findViewById(R.id.radioGroup);
         PIN = (EditText) findViewById(R.id.editTextPIN);
+        PIN.setText("");
 
         PIN.setEnabled(false);
 
-        grupo.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+        grupo.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-
-                if(checkedId==R.id.radioButtonAluno)
-                {
-                    PIN.setEnabled(false);
-                    DBUsuario = new Aluno();
+                try {
+                    if (checkedId == aluno.getId()) {
+                        PIN.setEnabled(false);
+                        dbUsuario = new Aluno();
+                    }
+                    if (checkedId == professor.getId()) {
+                        PIN.setEnabled(true);
+                        dbUsuario = new Professor();
+                    }
                 }
-                if(checkedId==R.id.radioButtonProf)
-                {
-                    PIN.setEnabled(true);
-                    DBUsuario = new Professor();
+                catch (Exception e){
+                    exibirTexto("Erro", e.getMessage());
                 }
             }
-    });
-
-        Intent intent = getIntent();
-        if (intent != null){
-            Bundle bundle = intent.getExtras();
-            if (bundle != null){
-                this.editTextCDNome.setText(bundle.getString("nome"));
-                this.editTextCDLogin.setText(bundle.getString("login"));
-                this.editTextCDSenha.setText(bundle.getString("senha"));
-            }
-        }
+        });
     }
 
     public void salvar(View view) {
         try {
-            this.DBUsuario.setNome(this.editTextCDNome.getText().toString());
-            this.DBUsuario.setLogin(this.editTextCDLogin.getText().toString());
-            this.DBUsuario.setSenha(this.editTextCDSenha.getText().toString());
+            String nomeusuario = editTextCDNome.getText().toString();
+            String loginusuario = editTextCDLogin.getText().toString();
+            String senhausuario = editTextCDSenha.getText().toString();
 
-            this.DBUsuario.salvar(PIN.getText().toString());
+            if (!(editTextCDNome.getText().toString().equals("") || editTextCDNome.getText() == null ||
+                    editTextCDLogin.getText().toString().equals("") || editTextCDLogin.getText() == null ||
+                    editTextCDSenha.getText().toString().equals("") || editTextCDSenha.getText() == null
 
-            Toast.makeText(this, this.DBUsuario.get_mensagem(), Toast.LENGTH_LONG).show();
-            if (DBUsuario.is_status())
-                finish();
+            )) {
+
+                dbUsuario.setNome(nomeusuario);
+                dbUsuario.setLogin(loginusuario);
+                dbUsuario.setSenha(senhausuario);
+
+                dbUsuario.salvar(PIN.getText().toString());
+
+                exibirTexto("CRIAÇÃO DE USUÁRIO", "Usuário " + nomeusuario + " criado com sucesso!");
+
+                editTextCDNome.setText("");
+                editTextCDLogin.setText("");
+                editTextCDSenha.setText("");
+                PIN.setText("");
+            }
         }
         catch (Exception e){
             exibirTexto("Erro", e.getMessage());
@@ -96,8 +109,8 @@ public class CadastrarUsuario extends AppCompatActivity {
     }
 
     public void cdCancelar(View view) {
-            finish();
-        }
+        finish();
     }
+}
 
 
