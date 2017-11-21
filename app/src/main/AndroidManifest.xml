@@ -19,8 +19,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".CadastrarQuizz" />
-        <activity android:name=".ListaActivity" />
-        <activity android:name=".MainActivity" />
         <activity android:name=".CadastrarUsuario" />
         <activity android:name=".MenuJogo" />
         <activity android:name=".Jogando" />

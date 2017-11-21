@@ -20,29 +20,20 @@ import java.util.concurrent.ExecutionException;
 
 public class MenuJogo extends AppCompatActivity {
 
+    MessageDialog messageDialog;
     private Spinner selecioneamateria;
+    ArrayList<Integer> armazenador_materia = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menujogo);
 
+        messageDialog = new MessageDialog(MenuJogo.this);
+
         selecioneamateria = (Spinner) findViewById(R.id.spinner2);
 
         selecionando();
-    }
-
-    public void exibirTexto(String titulo, String txt){
-        AlertDialog alertDialog = new AlertDialog.Builder(MenuJogo.this).create();
-        alertDialog.setTitle(titulo);
-        alertDialog.setMessage(txt);
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-        alertDialog.show();
     }
 
     public void selecionando () {
@@ -54,6 +45,7 @@ public class MenuJogo extends AppCompatActivity {
             while(rs.next())
             {
                 array.add(rs.getString("nomedocurso"));
+                armazenador_materia.add(Integer.parseInt(rs.getString("cursoid")));
             }
 
             ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, array);
@@ -61,12 +53,13 @@ public class MenuJogo extends AppCompatActivity {
             selecioneamateria.setAdapter(adapter);
         }
         catch (Exception e) {
-            exibirTexto("Erro", e.getMessage());
+            messageDialog.showText("Erro", e.getMessage());
         }
     }
 
     public void jogar (View view){
-        Intent intent =  new Intent(this, Jogando.class);
+        int pk = armazenador_materia.get(selecioneamateria.getSelectedItemPosition());
+        Intent intent =  new Intent(this, new Jogando(pk).getClass());
         startActivity(intent);
     }
 }

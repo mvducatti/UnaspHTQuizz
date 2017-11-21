@@ -61,13 +61,4 @@ public class CadastrarCurso extends AppCompatActivity {
         finish();
     }
 
-    public void visualizarcurso (View view){
-        try {
-            Intent intent = new Intent(this, ListaActivity.class);
-            startActivity(intent);
-        }
-        catch (Exception e){
-            exibirTexto("Erro", e.getMessage());
-        }
-    }
 }
