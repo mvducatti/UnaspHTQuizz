@@ -36,6 +36,8 @@ public class MessageDialog {
         alertDialog.setTitle(titulo);
         alertDialog.setMessage(txt);
         alertDialog.setButton(android.support.v7.app.AlertDialog.BUTTON_NEUTRAL, "OK", buttonMeth);
+        alertDialog.setCancelable(false);
+        alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.show();
     }
 }

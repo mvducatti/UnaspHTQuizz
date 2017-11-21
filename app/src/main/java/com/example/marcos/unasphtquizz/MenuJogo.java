@@ -24,6 +24,8 @@ public class MenuJogo extends AppCompatActivity {
     private Spinner selecioneamateria;
     ArrayList<Integer> armazenador_materia = new ArrayList<>();
 
+    public MenuJogo(){}
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -45,13 +45,13 @@ public class CadastrarUsuario extends AppCompatActivity {
 
         dbUsuario = new Aluno();
 
-        editTextCDNome = (EditText) findViewById(R.id.editTextCDNome);
-        editTextCDLogin = (EditText) findViewById(R.id.editTextCDLogin);
-        editTextCDSenha = (EditText) findViewById(R.id.editTextCDSenha);
-        aluno = (RadioButton) findViewById(R.id.radioButtonAluno);
-        professor = (RadioButton) findViewById(R.id.radioButtonProf);
-        grupo = (RadioGroup) findViewById(R.id.radioGroup);
-        PIN = (EditText) findViewById(R.id.editTextPIN);
+        editTextCDNome = findViewById(R.id.editTextCDNome);
+        editTextCDLogin = findViewById(R.id.editTextCDLogin);
+        editTextCDSenha = findViewById(R.id.editTextCDSenha);
+        aluno = findViewById(R.id.radioButtonAluno);
+        professor = findViewById(R.id.radioButtonProf);
+        grupo = findViewById(R.id.radioGroup);
+        PIN = findViewById(R.id.editTextPIN);
         PIN.setText("");
 
         PIN.setEnabled(false);

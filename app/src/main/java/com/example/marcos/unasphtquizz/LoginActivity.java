@@ -20,8 +20,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        editLogin = (EditText) findViewById(R.id.loginText);
-        editSenha = (EditText) findViewById(R.id.SenhaText);
+        editLogin = findViewById(R.id.loginText);
+        editSenha = findViewById(R.id.SenhaText);
     }
 
     public void exibirTexto(String titulo, String txt){

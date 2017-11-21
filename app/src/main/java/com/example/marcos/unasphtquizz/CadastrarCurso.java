@@ -57,6 +57,16 @@ public class CadastrarCurso extends AppCompatActivity {
         }
     }
 
+    public void irprojogo(View view){
+        try {
+            Intent intent = new Intent(this, MenuJogo.class);
+            startActivity(intent);
+        }
+        catch (Exception e){
+            exibirTexto("Erro", e.getMessage());
+        }
+    }
+
     public void cancelarcurso (View view){
         finish();
     }
